@@ -20,22 +20,75 @@ $(document).ready(function(){
         text: "Welcome " +$("#name option:selected").val(),
         class: "welcomeUser2",
       }).appendTo($(".header").show(5500));
-      $(".selectDiv").hide(1000).remove();
+      $(".selectDiv").hide(1000);
 
       $("<input/>",{
-        placeholder:"Write the Survey name ...",
+        type:"password",
+        placeholder:"Enter Password",
+        id:"password",
         class: "inputnameDiv",
       }).appendTo($(".usersinfo"));
 
-      $("<input/>",{
-        placeholder:"Put the Survey Link ...",
-        class: "inputlinkDiv",
-      }).appendTo($(".usersinfo"));
-
       $("<button/>",{
-        text:"Add Survey",
+        text:"Go ...",
         class: "buttonDiv",
-      }).appendTo($(".usersinfo"));
+        id:"passwordgo"
+      }).appendTo($(".usersinfo"));      
+
+      $("#passwordgo").click(function(){
+        if ($("#password").val() === "123456789") {
+          $("#survey1").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLScKa_jmtHMUC5MwF6egs_i0sO5Y4Z_zHBo1zeQM7COsyEndsg/viewform'target='_blank'>Emotional Survey</a>");
+          $("#survey2").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLScGWNGmF5RTta26gM339JEA4YUVj2CFIWaSQNtnn3kTxQ89bw/viewform'target='_blank'>Lecture Survey</a>");
+          $("#survey3").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeTTQ7Hg_e6o-g-Hg3a5_QtsfQxRubZ93gj96x8MSKpPGvVpA/viewform'target='_blank'>Guest Survey</a>");
+          $("#survey4").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLSfM5bCXP9IqryD_40-eRhxakbALvUNakZXqcBuRB1giQ7gjhA/viewform'target='_blank'>Sprint Survey</a>");            $("#survey5").html("<a href='https://docs.google.com/forms/d/1OAcXCIx95D3urdotqZ7yWpqMfPx4kI2JnLLGVX39FD0/viewform?edit_requested=true'target='_blank'>Weekly Challenge Survey</a>");
+
+          $("#password").remove();
+          $("#passwordgo").remove();
+
+          $("<input/>",{
+            placeholder:"Write the Survey name ...",
+            class: "inputnameDiv",
+          }).appendTo($(".surveyinput"));
+
+          $("<input/>",{
+            placeholder:"Put the Survey Link ...",
+            class: "inputlinkDiv",
+          }).appendTo($(".surveyinput"));
+
+          $("<button/>",{
+            text:"Add Survey",
+            class: "buttonDiv",
+          }).appendTo($(".surveyinput"));
+
+          $("<button/>",{
+            text:"Go back",
+            class: "gobackDiv",
+          }).appendTo($(".surveyinput"));
+
+          $(".gobackDiv").click(function(){ 
+            $(".selectDiv").show();
+            $(".surveyinput").hide();
+           $(".welcomeUser2").remove();
+          })      
+
+          $(".buttonDiv").click(function(){
+            var name = $(".inputnameDiv").val();
+            var link = $(".inputlinkDiv").val();
+            $("<li/>",{
+              html: "<a href="+link +" target='_blank'>"+name+"</a>",
+              id: idChange(),
+              class: "element",
+            }).appendTo($(".orderlist"));
+            $(".inputnameDiv").val("");
+            $(".inputlinkDiv").val('');
+          })
+        } 
+
+        else{
+          alert("incorrect Password");
+          $("#password").val('');
+        }
+      })
     }
 
     else{ 
@@ -43,29 +96,38 @@ $(document).ready(function(){
         text: "Welcome " +$("#name option:selected").val(),
         class: "welcomeUser2",
       }).appendTo($(".header").show(5500));
+
       $(".selectDiv").hide(1000).remove();
-      $(".welcomUser").append("<p>You Still have a 5 Survey to Fill.</p>")
-      $("#emotional").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLScKa_jmtHMUC5MwF6egs_i0sO5Y4Z_zHBo1zeQM7COsyEndsg/viewform'target='_blank'>Emotional Survey</a>");
-      $("#lecture").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLScGWNGmF5RTta26gM339JEA4YUVj2CFIWaSQNtnn3kTxQ89bw/viewform'target='_blank'>Lecture Survey</a>");
-      $("#guest").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeTTQ7Hg_e6o-g-Hg3a5_QtsfQxRubZ93gj96x8MSKpPGvVpA/viewform'target='_blank'>Guest Survey</a>");
-      $("#sprint").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLSfM5bCXP9IqryD_40-eRhxakbALvUNakZXqcBuRB1giQ7gjhA/viewform'target='_blank'>Sprint Survey</a>");
-      $("#weekly").html("<a href='https://docs.google.com/forms/d/1OAcXCIx95D3urdotqZ7yWpqMfPx4kI2JnLLGVX39FD0/viewform?edit_requested=true'target='_blank'>Weekly Challenge Survey</a>");
-
-
-
-
+      $(".welcomUser").append("<p>You Still have a "+ surveycounter +" Survey to Fill.</p>")
+      $("#survey1").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLScKa_jmtHMUC5MwF6egs_i0sO5Y4Z_zHBo1zeQM7COsyEndsg/viewform'target='_blank'>Emotional Survey</a>");
+      $("#survey2").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLScGWNGmF5RTta26gM339JEA4YUVj2CFIWaSQNtnn3kTxQ89bw/viewform'target='_blank'>Lecture Survey</a>");
+      $("#survey3").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeTTQ7Hg_e6o-g-Hg3a5_QtsfQxRubZ93gj96x8MSKpPGvVpA/viewform'target='_blank'>Guest Survey</a>");
+      $("#survey4").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLSfM5bCXP9IqryD_40-eRhxakbALvUNakZXqcBuRB1giQ7gjhA/viewform'target='_blank'>Sprint Survey</a>");
+      $("#survey5").html("<a href='https://docs.google.com/forms/d/1OAcXCIx95D3urdotqZ7yWpqMfPx4kI2JnLLGVX39FD0/viewform?edit_requested=true'target='_blank'>Weekly Challenge Survey</a>");
 
     }
-	})
+  })
+  $(".buttonDiv").click(function(){
+    var name = $(".inputnameDiv").val();
+    var link = $(".inputlinkDiv").val();
+    $("<li/>",{
+      text: name,
+      href: link,
+      class: idChange(),
+    }).appendTo($(".orderlist"));
+  })
+
+
+
 
 
 });
 
 
-
-var counter1= 0;
+var surveycounter = 5;
+var counter1= 5;
 function idChange(){
-	var string = "m";
+	var string = "Survey";
 	string += counter1;
 	counter1++; 
 	return string;
