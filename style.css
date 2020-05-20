@@ -1,0 +1,77 @@
+.page {
+	margin: auto;
+	text-align: center;
+	padding: 50px;
+}
+.header {
+  height: 155px;
+  padding-left: 100px;
+  text-align: left;
+  background: #1abc9c;
+  color: white;
+  font-size: 30px;
+}
+
+h1{
+	padding: 1px;
+	float: left;
+}
+.welcomeUser2 {
+	float: right;
+	padding-right: 10%;
+    padding-top: 3%;
+}
+
+.welcomUser {
+	display: block;
+}
+
+.survey{
+	max-width: 600px;
+	text-align: left;
+	font-size: 30px;
+	padding-left: 100px;
+	float: left
+}
+.element{
+	padding: 15px;
+	padding-left: 40px;
+}
+
+
+.leftside{
+float: right;
+}
+
+.leftside{
+	float: right;
+    padding-right: 17%;
+    padding-top: 7.5%
+    
+}
+
+p{
+	text-align: left;
+    padding-left: 5%;
+    font-size: 24px;
+    color: mediumvioletred;
+    font-family: 'American Typewriter', 'serif';
+}
+
+select {
+	position: relative;
+    width: 300px;
+    height: 30px;
+    margin-top: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    font-size: 12px;
+    color: black;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(27,31,35,.15);
+    border-radius: 3px;
+    box-shadow: 0 3px 12px rgba(27,31,35,.15);
+    padding-left: 20px;
+    font-size: 15px;
+}
