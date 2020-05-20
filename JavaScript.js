@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	for (var i = 0; i < usersName.length; i++) {
 		$("<option/>",{
 			text:usersName[i],
@@ -8,19 +9,17 @@ $(document).ready(function(){
 	};
 
 	$("#select").click(function(){
-
 		if($("#name option:selected").val() === "" )
     {		
 			alert("Please chose Your Name");
 		}
-
     else if ($("#name option:selected").val() === "hend-isleem"||$("#name option:selected").val() ==="Nour-Saqqa"||$("#name option:selected").val() ==="Dalia-Awad" || $("#name option:selected").val() ==="Kareem-Abdelwahed" ||$("#name option:selected").val() === "Maha-Nabahin"||$("#name option:selected").val() ==="Ola-Mhanna") 
     {
       $("<p/>",{
         text: "Welcome " +$("#name option:selected").val(),
         class: "welcomeUser2",
       }).appendTo($(".header").show(5500));
-      $(".selectDiv").hide(1000);
+      $(".selectDiv").hide();
 
       $("<input/>",{
         type:"password",
@@ -97,8 +96,14 @@ $(document).ready(function(){
         class: "welcomeUser2",
       }).appendTo($(".header").show(5500));
 
-      $(".selectDiv").hide(1000).remove();
-      $(".welcomUser").append("<p>You Still have a "+ surveycounter +" Survey to Fill.</p>")
+      $(".selectDiv").hide().remove();
+
+      $("<p/>",{
+        class:"surveyNumber",
+      }).appendTo($(".welcomUser"));
+
+      $(".surveyNumber").text("You Still have a "+ surveycounter +" Survey to Fill.")
+
       $("#survey1").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLScKa_jmtHMUC5MwF6egs_i0sO5Y4Z_zHBo1zeQM7COsyEndsg/viewform'target='_blank'>Emotional Survey</a>");
       $("#survey2").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLScGWNGmF5RTta26gM339JEA4YUVj2CFIWaSQNtnn3kTxQ89bw/viewform'target='_blank'>Lecture Survey</a>");
       $("#survey3").html("<a href='https://docs.google.com/forms/d/e/1FAIpQLSeTTQ7Hg_e6o-g-Hg3a5_QtsfQxRubZ93gj96x8MSKpPGvVpA/viewform'target='_blank'>Guest Survey</a>");
@@ -106,7 +111,7 @@ $(document).ready(function(){
       $("#survey5").html("<a href='https://docs.google.com/forms/d/1OAcXCIx95D3urdotqZ7yWpqMfPx4kI2JnLLGVX39FD0/viewform?edit_requested=true'target='_blank'>Weekly Challenge Survey</a>");
 
     }
-  })
+  });
   $(".buttonDiv").click(function(){
     var name = $(".inputnameDiv").val();
     var link = $(".inputlinkDiv").val();
@@ -115,9 +120,21 @@ $(document).ready(function(){
       href: link,
       class: idChange(),
     }).appendTo($(".orderlist"));
-  })
+  });
 
+    $(".orderlist li").click(function(){
+      surveycounter--;
+     var surveyId = $(this)[0].id;
+      if(surveycounter === 0){
+        $(".surveyNumber").text("Thank You. You Do it");
+      }else {
+      $(".surveyNumber").text("");
+      $(".surveyNumber").text("You Still have a "+ surveycounter +" Survey to Fill.");
+      $("#"+surveyId).css("text-decoration","line-through");
+      $("#"+surveyId).css("color","red");
 
+      }
+    })
 
 
 
