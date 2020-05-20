@@ -3,7 +3,7 @@ $(document).ready(function(){
 	for (var i = 0; i < usersName.length; i++) {
 		$("<option/>",{
 			text:usersName[i],
-			id:idChange(),
+			id:idChange(surveycounter),
 			class: "username",
 		}).appendTo($("#name"));
 	};
@@ -64,6 +64,18 @@ $(document).ready(function(){
             class: "gobackDiv",
           }).appendTo($(".surveyinput"));
 
+          $("<input/>",{
+            placeholder:"Number Survey to Delete",
+            class: "deleteNumber",
+          }).appendTo($(".surveyinput"));
+
+          $("<button/>",{
+            text:"Delete",
+            class: "deleteNumberbutton",
+            id:"delete",
+          }).appendTo($(".surveyinput"));
+
+
           $(".gobackDiv").click(function(){ 
             $(".selectDiv").show();
             $(".surveyinput").hide();
@@ -71,16 +83,43 @@ $(document).ready(function(){
           })      
 
           $(".buttonDiv").click(function(){
+
             var name = $(".inputnameDiv").val();
             var link = $(".inputlinkDiv").val();
+
+            if(name === "" || link === ""){
+              if(name === "" && link === ""){
+                alert("Please Put A name % Link");
+                return false;
+              }
+              alert("Please Put A name % Link");
+              return false;
+            };
+
             $("<li/>",{
               html: "<a href="+link +" target='_blank'>"+name+"</a>",
-              id: idChange(),
               class: "element",
+              id: idChange(counter1),
+              
             }).appendTo($(".orderlist"));
             $(".inputnameDiv").val("");
             $(".inputlinkDiv").val('');
           })
+
+          $("#delete").click(function(){
+
+            var del = $(".deleteNumber").val();
+
+            if( del === ""){
+              alert("Please Chose One!?");
+              return false;
+            }
+            if (del <= surveycounter) {
+              console.log(surveycounter)
+              $("#survey" + del).remove();
+              $(".deleteNumber").val("");
+            }
+          });
         } 
 
         else{
@@ -94,9 +133,9 @@ $(document).ready(function(){
       $("<p/>",{
         text: "Welcome " +$("#name option:selected").val(),
         class: "welcomeUser2",
-      }).appendTo($(".header").show(5500));
+      }).appendTo($(".header"));
 
-      $(".selectDiv").hide().remove();
+      $(".selectDiv").hide();
 
       $("<p/>",{
         class:"surveyNumber",
@@ -118,7 +157,7 @@ $(document).ready(function(){
     $("<li/>",{
       text: name,
       href: link,
-      class: idChange(),
+      class: idChange(counter1),
     }).appendTo($(".orderlist"));
   });
 
@@ -130,12 +169,17 @@ $(document).ready(function(){
       }else {
       $(".surveyNumber").text("");
       $(".surveyNumber").text("You Still have a "+ surveycounter +" Survey to Fill.");
-      $("#"+surveyId).css("text-decoration","line-through");
+      // $("#"+surveyId).css("text-decoration","line-through");
       $("#"+surveyId).css("color","red");
 
       }
-    })
+    });
 
+
+
+
+
+    
 
 
 });
@@ -143,10 +187,10 @@ $(document).ready(function(){
 
 var surveycounter = 5;
 var counter1= 5;
-function idChange(){
-	var string = "Survey";
-	string += counter1;
-	counter1++; 
+function idChange(counter){
+	var string = "survey";
+	string += counter;
+	counter++; 
 	return string;
 };
 
